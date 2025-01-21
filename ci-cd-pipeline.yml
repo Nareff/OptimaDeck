@@ -1,0 +1,18 @@
+pipeline:
+    build:
+      steps:
+        - script:
+            description: "Installer les dépendances"
+            command: |
+              pip install -r requirements.txt
+        - script:
+            description: "Construction de l'image Docker"
+            command: |
+              docker build -t optimadeck:latest .
+    deploy:
+      steps:
+        - script:
+            description: "Déploiement sur le serveur"
+            command: |
+              docker run -d -p 80:5000 optimadeck:4.2.0
+  

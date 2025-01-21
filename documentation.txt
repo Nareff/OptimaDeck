@@ -1,0 +1,113 @@
+# Documentation de l'application OptimaDeck
+
+**Version actuelle** : 2.4.3 (Non-LTS)
+
+## Introduction
+
+OptimaDeck est une application de gestion de tâches conçue pour optimiser la collaboration et la productivité des équipes. 
+
+---
+
+## Fonctionnalités principales
+
+1. **Tableau de bord personnalisé**
+
+   - Visualisation en temps réel des tâches en cours, à venir et terminées.
+   - Indicateurs de performance pour chaque projet.
+
+2. **Gestion des utilisateurs**
+
+   - Rôles disponibles : Administrateur, Manager, Utilisateur standard.
+   - Contrôles d'accès granulaires pour garantir la confidentialité des données.
+
+3. **Système de notifications**
+
+   - Alertes pour les échéances à venir.
+   - Notifications sur les modifications des tâches partagées.
+
+4. **Intégrations**
+
+   - Intégration avec les outils de communication comme Slack et Microsoft Teams.
+   - Compatibilité avec les calendriers Google et Outlook.
+
+5. **Historique des modifications**
+
+   - Enregistrement détaillé des modifications effectuées sur les tâches.
+   - Possibilité de restaurer des versions antérieures des tâches.
+
+---
+
+## Prérequis système
+
+- **Serveur** :
+  - PHP >= 8.0
+  - MySQL >= 8.0 ou PostgreSQL >= 13
+  - Apache 2.4 ou Nginx
+- **Client** :
+  - Navigateur compatible (Chrome, Firefox, Edge, Safari).
+  - JavaScript activé.
+
+---
+
+## Installation
+
+### Étape 1 : Préparation du serveur
+
+1. Installer PHP, MySQL/PostgreSQL, et un serveur web.
+2. Vérifier que les extensions PHP suivantes sont activées :
+   - `pdo`
+   - `mbstring`
+   - `json`
+
+### Étape 2 : Déployer les fichiers
+
+1. Télécharger la dernière version d'OptimaDeck depuis le portail officiel.
+2. Extraire les fichiers dans le répertoire racine du serveur web.
+
+### Étape 3 : Configuration
+
+1. Renommer le fichier `config.example.php` en `config.php`.
+2. Modifier les paramètres de connexion à la base de données dans `config.php`.
+3. Exécuter le script de migration pour créer les tables nécessaires :
+   ```bash
+   php artisan migrate
+   ```
+
+---
+
+## Mise à jour
+
+Pour mettre à jour OptimaDeck, suivez ces étapes :
+
+1. **Sauvegardez vos données** : Exportez la base de données et effectuez une copie des fichiers critiques.
+2. **Téléchargez la nouvelle version** : Remplacez les anciens fichiers par les nouveaux.
+3. **Lancez les scripts de migration** (si nécessaires) pour mettre à jour la structure de la base de données :
+   ```bash
+   php artisan migrate
+   ```
+4. **Vérifiez les logs** pour détecter tout problème après la mise à jour.
+
+---
+
+## Limitations de la version 2.4.3
+
+1. Cette version **non-LTS** est destinée à des usages expérimentaux.
+2. Les rapports de performances présentent un bug connu : les graphiques peuvent afficher des données incorrectes dans certaines conditions.
+3. Une faille de sécurité critique a été signalée dans le module d'importation des fichiers CSV (détails ci-dessous).
+
+---
+
+## Vulnérabilité connue
+
+### Faille dans le module d'importation CSV
+
+- **Description** : Une injection de commandes est possible via des fichiers CSV malveillants. Cette faille est corrigée dans la version 2.5.0 (prochaine mise à jour).
+- **Recommandation** :
+  - Désactiver temporairement le module d'importation via `config.php` :
+    ```php
+    'import_module_enabled' => false;
+    ```
+  - Mettre à jour vers une version LTS dès sa sortie.
+
+**Date de publication** : 20 janvier 2024
+
