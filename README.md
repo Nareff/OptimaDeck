@@ -6,8 +6,8 @@ OptimaDeck est une application de gestion de tâches conçue pour optimiser la c
 
 ### 1. `app.py`
 Un serveur Flask:
-- **Lecture non sécurisée de variables d'environnement** : Exposition de clés via `/config`.
-- **Exécution de commandes arbitraires** : Endpoint `/run` permettant l'exécution de commandes.
+- **Lecture de variables d'environnement** : Exposition de clés via `/config`.
+- **Exécution de commandes** : Endpoint `/run` permettant l'exécution de commandes.
 
 ### 2. `requirements.txt`
 Liste des dépendances de l'application.
